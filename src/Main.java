@@ -24,12 +24,10 @@ public class Main {
 
     public static void checkIsLeapYear (int year) {
 
-        if (year > 1584 && year %400 == 0) {
+        if (year > 1584 && (year %400 == 0 || year % 4 == 0)) {
             System.out.println(year + " является високосным");
         } else if (year > 1584 && year %100 == 0) {
             System.out.println(year + " не является високосным");
-        } else if (year > 1584 && year %4 == 0) {
-            System.out.println(year + " является високосным");
         }else {
             System.out.println(year + " не является високосным");
         }
@@ -39,11 +37,13 @@ public class Main {
 
         int currentYear = LocalDate.now().getYear();
 
-        if (clientOs == 0 && clientDeviceYear < currentYear) {
+        // с допущением по условию задачи, что ранее 2015 года - это > 2015 г, позже 2015 - это
+        // < 2015 г.
+        if (clientOs == 0 && clientDeviceYear < currentYear && clientDeviceYear > 2015) {
             System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-        } else if (clientOs == 0 && clientDeviceYear == currentYear) {
+        } else if (clientOs == 0 && clientDeviceYear == currentYear && clientDeviceYear < 2015) {
             System.out.println("Установите версию приложения для iOS по ссылке");
-        } else if (clientOs != 0 && clientDeviceYear < currentYear) {
+        } else if (clientOs != 0 && clientDeviceYear < currentYear && clientDeviceYear > 2015) {
             System.out.println("Установите облегченную версию приложения для Android по ссылке");
         } else {
             System.out.println("Установите версию приложения для Android по ссылке");
